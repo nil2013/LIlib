@@ -4,6 +4,8 @@ package core
 
 object Court {
   lazy val LEVEL = Array("最高", "高等", "地方", "家庭", "簡易")
+
+  def apply(p: String, l: Int, b: String): Court = SimpleCourt(p, l, b)
 }
 
 trait Court {

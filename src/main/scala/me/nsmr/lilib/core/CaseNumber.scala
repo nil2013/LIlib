@@ -6,6 +6,10 @@ import java.util.Date
 
 object CaseNumber {
   lazy val yearFormat = new java.text.SimpleDateFormat("GGGGy", new java.util.Locale("ja", "JP", "JP"))
+
+  def apply(year: Date, mark: String, index: Int): CaseNumber = {
+    return SimpleCaseNumber(year, mark, index)
+  }
 }
 
 trait CaseNumber {
