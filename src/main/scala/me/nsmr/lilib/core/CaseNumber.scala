@@ -10,6 +10,7 @@ object CaseNumber {
   def apply(year: Date, mark: String, index: Int): CaseNumber = {
     return SimpleCaseNumber(year, mark, index)
   }
+  def unapply(obj: CaseNumber): Option[(Date, String, Int)] = return (obj.year, obj.mark, obj.index)
 }
 
 trait CaseNumber {
