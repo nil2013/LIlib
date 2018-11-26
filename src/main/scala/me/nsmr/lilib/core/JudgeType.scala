@@ -18,8 +18,11 @@ object JudgeType {
 
   def unapply(x: JudgeType) = Option((x.name))
 
-  def apply(n: String) = n match {
-    case JUDGMENT.name => JUDGMENT
-    case ORDER.name => ORDER
+  def apply(name: String): JudgeType = get(name).get
+
+  def get(n: String): Option[JudgeType] = n match {
+    case JUDGMENT.name => Option(JUDGMENT)
+    case ORDER.name => Option(ORDER)
+    case _ => None
   }
 }
