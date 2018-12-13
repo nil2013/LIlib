@@ -25,7 +25,7 @@ trait CaseNumber {
 
 object CaseYear {
 
-  sealed abstract class Era(val name: String, val japaneseEra: JapaneseEra) {
+  sealed abstract class Era(val name: String, val javaEra: JapaneseEra) {
     override def toString(): String = name
   }
 
@@ -54,5 +54,5 @@ case class CaseYear(era: CaseYear.Era, year: Int) {
 
   override def toString = s"${era}${year}年"
 
-  def toYear: Year = Year.from(JapaneseDate.of(era.japaneseEra, year, 1, 1))
+  def toJavaYear: Year = Year.from(JapaneseDate.of(era.javaEra, year, 1, 1))
 }
