@@ -18,7 +18,10 @@ object JudgeType {
 
   def unapply(x: JudgeType) = Option((x.name))
 
-  def apply(name: String): JudgeType = get(name).get
+  def apply(name: String): JudgeType = get(name) match {
+    case Some(obj) => obj
+    case None => throw new JudgeTypeFormatException(s"it is not appropreate judge type: ${name}")
+  }
 
   def get(n: String): Option[JudgeType] = n match {
     case JUDGMENT.name => Option(JUDGMENT)
@@ -26,3 +29,5 @@ object JudgeType {
     case _ => None
   }
 }
+
+class JudgeTypeFormatException(mes: String = "") extends IllegalArgumentException(mes)
