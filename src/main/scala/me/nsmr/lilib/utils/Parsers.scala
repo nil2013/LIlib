@@ -50,3 +50,4 @@ object Parsers {
 }
 
 class CaseNumberFormatException(mes: String = "") extends IllegalArgumentException(mes)
+class CourtFormatException(mes: String = "") extends IllegalArgumentException(mes)
