@@ -134,10 +134,6 @@
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="me.nsmr.lilib">lilib</a></dd></dl></div>
     </li><li class="current-entities indented4">
-                        <a class="object" href="ARTIdentifier$.html" title=""></a>
-                        <a class="trait" href="ARTIdentifier.html" title=""></a>
-                        <a href="ARTIdentifier.html" title="">ARTIdentifier</a>
-                      </li><li class="current-entities indented4">
                         <a class="object" href="CaseNumber$.html" title=""></a>
                         <a class="trait" href="CaseNumber.html" title=""></a>
                         <a href="CaseNumber.html" title="">CaseNumber</a>
@@ -154,9 +150,9 @@
                         <a class="class" href="JudgeType.html" title=""></a>
                         <a href="JudgeType.html" title="">JudgeType</a>
                       </li><li class="current-entities indented4">
-                        <a class="object" href="Legislation$.html" title=""></a>
-                        <a class="trait" href="Legislation.html" title=""></a>
-                        <a href="Legislation.html" title="">Legislation</a>
+                        <span class="separator"></span>
+                        <a class="class" href="JudgeTypeFormatException.html" title=""></a>
+                        <a href="JudgeTypeFormatException.html" title="">JudgeTypeFormatException</a>
                       </li><li class="current-entities indented4">
                         <a class="object" href="" title=""></a>
                         <a class="trait" href="Precedent.html" title=""></a>
@@ -169,10 +165,6 @@
                         <span class="separator"></span>
                         <a class="class" href="SimpleCourt.html" title=""></a>
                         <a href="SimpleCourt.html" title="">SimpleCourt</a>
-                      </li><li class="current-entities indented4">
-                        <span class="separator"></span>
-                        <a class="class" href="SimpleLegislation.html" title=""></a>
-                        <a href="SimpleLegislation.html" title="">SimpleLegislation</a>
                       </li><li class="current-entities indented4">
                         <span class="separator"></span>
                         <a class="class" href="SimplePrecedent.html" title=""></a>
@@ -313,9 +305,9 @@
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="me.nsmr.lilib.core.Precedent#apply" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="apply(num:me.nsmr.lilib.core.CaseNumber,date:java.util.Date,court:me.nsmr.lilib.core.Court,judgeType:Option[me.nsmr.lilib.core.JudgeType],content:Option[String]):me.nsmr.lilib.core.Precedent"></a><a id="apply(CaseNumber,Date,Court,Option[JudgeType],Option[String]):Precedent"></a>
+      <a id="apply(num:me.nsmr.lilib.core.CaseNumber,date:java.time.LocalDate,court:me.nsmr.lilib.core.Court,judgeType:Option[me.nsmr.lilib.core.JudgeType],content:Option[String]):me.nsmr.lilib.core.Precedent"></a><a id="apply(CaseNumber,LocalDate,Court,Option[JudgeType],Option[String]):Precedent"></a>
       <span class="permalink">
-      <a href="../../../../me/nsmr/lilib/core/Precedent$.html#apply(num:me.nsmr.lilib.core.CaseNumber,date:java.util.Date,court:me.nsmr.lilib.core.Court,judgeType:Option[me.nsmr.lilib.core.JudgeType],content:Option[String]):me.nsmr.lilib.core.Precedent" title="Permalink">
+      <a href="../../../../me/nsmr/lilib/core/Precedent$.html#apply(num:me.nsmr.lilib.core.CaseNumber,date:java.time.LocalDate,court:me.nsmr.lilib.core.Court,judgeType:Option[me.nsmr.lilib.core.JudgeType],content:Option[String]):me.nsmr.lilib.core.Precedent" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -324,7 +316,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">apply</span><span class="params">(<span name="num">num: <a href="CaseNumber.html" class="extype" name="me.nsmr.lilib.core.CaseNumber">CaseNumber</a></span>, <span name="date">date: <span class="extype" name="java.util.Date">Date</span></span>, <span name="court">court: <a href="Court.html" class="extype" name="me.nsmr.lilib.core.Court">Court</a></span>, <span name="judgeType">judgeType: <span class="extype" name="scala.Option">Option</span>[<a href="JudgeType.html" class="extype" name="me.nsmr.lilib.core.JudgeType">JudgeType</a>]</span>, <span name="content">content: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result">: <a href="Precedent.html" class="extype" name="me.nsmr.lilib.core.Precedent">Precedent</a></span>
+        <span class="name">apply</span><span class="params">(<span name="num">num: <a href="CaseNumber.html" class="extype" name="me.nsmr.lilib.core.CaseNumber">CaseNumber</a></span>, <span name="date">date: <span class="extype" name="java.time.LocalDate">LocalDate</span></span>, <span name="court">court: <a href="Court.html" class="extype" name="me.nsmr.lilib.core.Court">Court</a></span>, <span name="judgeType">judgeType: <span class="extype" name="scala.Option">Option</span>[<a href="JudgeType.html" class="extype" name="me.nsmr.lilib.core.JudgeType">JudgeType</a>]</span>, <span name="content">content: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result">: <a href="Precedent.html" class="extype" name="me.nsmr.lilib.core.Precedent">Precedent</a></span>
       </span>
       
       
@@ -368,6 +360,22 @@
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="me.nsmr.lilib.core.Precedent#dateFormatter" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="dateFormatter:java.time.format.DateTimeFormatter"></a><a id="dateFormatter:DateTimeFormatter"></a>
+      <span class="permalink">
+      <a href="../../../../me/nsmr/lilib/core/Precedent$.html#dateFormatter:java.time.format.DateTimeFormatter" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">lazy val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">dateFormatter</span><span class="result">: <span class="extype" name="java.time.format.DateTimeFormatter">DateTimeFormatter</span></span>
+      </span>
+      
+      
     </li><li name="scala.AnyRef#eq" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a><a id="eq(AnyRef):Boolean"></a>
       <span class="permalink">
