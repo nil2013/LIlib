@@ -33,7 +33,7 @@ object Parsers {
 
   lazy val caseNumber: Parser[CaseNumber] = new Parser[CaseNumber] {
     private lazy val pattern = new Regex(
-      s"""(平成|昭和)(\\d+)(.+?)(\\d+)""",
+      s"""(平成|昭和)(\\d+|元)(.+?)(\\d+)""",
       "era", "year", "mark", "index"
     )
 
@@ -41,7 +41,11 @@ object Parsers {
       pattern.findFirstMatchIn(str).flatMap { m =>
         CaseYear.Era(m.group("era")).map { era =>
           if(m.before.length > 0 || m.after.length > 0) logger.debug(s"not exactly matches pattern of case number: ${str}")
-          CaseNumber(CaseYear(era, m.group("year").toInt), m.group("mark"), m.group("index").toInt)
+          val year = m.group("year") match {
+            case "元" => 1
+            case n => n.toInt
+          }
+          CaseNumber(CaseYear(era, year), m.group("mark"), m.group("index").toInt)
         }
       }
     }
