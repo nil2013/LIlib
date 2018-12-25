@@ -2,6 +2,7 @@ package me.nsmr
 package lilib
 package core
 
+import scala.util.Try
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.chrono.JapaneseChronology
@@ -20,4 +21,12 @@ trait Precedent {
   def judgeType: Option[JudgeType]
 
   def content: Option[String]
+
+  override def toString(): String = {
+    val c = Try { this.court }.toOption
+    val cn = Try { this.number }.toOption
+    val d = Try { this.date }.toOption
+    val splitter = if(cn.isDefined && d.isDefined) {"・"} else {""}
+    s"Precedent(${c.map(_.shortName).mkString}${cn.mkString}${ splitter }${d.map(_.format(Precedent.dateFormatter)).mkString}${c.map(_.branch).mkString}${judgeType.mkString}"
+  }
 }
