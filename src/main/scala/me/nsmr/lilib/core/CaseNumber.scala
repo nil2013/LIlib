@@ -54,5 +54,9 @@ case class CaseYear(era: CaseYear.Era, year: Int) {
 
   override def toString = s"${era}${year}年"
 
+  /**
+   * FIXME: 元年および末年を表現している場合、期間外エラーを吐くことがある
+   */
+  @deprecated
   def toJavaYear: Year = Year.from(JapaneseDate.of(era.javaEra, year, 1, 1))
 }
