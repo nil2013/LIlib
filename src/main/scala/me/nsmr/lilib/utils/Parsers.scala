@@ -3,7 +3,7 @@ package utils
 
 import scala.util.matching.Regex
 import com.typesafe.scalalogging.Logger
-import core.{ CaseNumber, CaseYear, Court }
+import core.{ CaseNumber, CaseYear, CaseMark, Court }
 
 trait Parser[T] { def parse(str: String): Option[T] }
 
@@ -33,8 +33,8 @@ object Parsers {
 
   lazy val caseNumber: Parser[CaseNumber] = new Parser[CaseNumber] {
     private lazy val pattern = new Regex(
-      s"""(平成|昭和)(\\d+|元)(.+?)(\\d+)""",
-      "era", "year", "mark", "index"
+      s"""(平成|昭和)(\\d+|元)年?\\s*(([^\\d]?)\\((.+)\\)([^\\d]?))\\s*第?(\\d+)号?""",
+      "era", "year", "mark", "mark.prefix", "mark.mark", "mark.suffix", "index"
     )
 
     override def parse(str: String): Option[CaseNumber] = {
@@ -45,7 +45,19 @@ object Parsers {
             case "元" => 1
             case n => n.toInt
           }
-          CaseNumber(CaseYear(era, year), m.group("mark"), m.group("index").toInt)
+          val mark = {
+            val mark = CaseMark(m.group("mark.mark").trim)
+            val prefix = m.group("mark.prefix").trim
+            val suffix = m.group("mark.suffix").trim
+            if(prefix != null && !prefix.isEmpty) {
+              mark.withPrefix(prefix.head)
+            } else if(suffix != null && !suffix.isEmpty) {
+              mark.withSuffix(suffix.head)
+            } else {
+              mark
+            }
+          }
+          CaseNumber(CaseYear(era, year), mark, m.group("index").toInt)
         }
       }
     }
