@@ -86,6 +86,10 @@ case class CaseMark(prefix: Option[Char], mark: String, suffix: Option[Char]) {
   override def toString = s"${prefix.mkString}(${mark})${suffix.mkString}"
   // override def toString = s"CaseMark(prefix = '${prefix.mkString}', mark = '${mark}', suffix = '${suffix.mkString}')"
 
+  def hasPrefix: Boolean = this.prefix.isDefined
+
+  def hasSuffix: Boolean = this.suffix.isDefined
+
   def withPrefix(prefix: Char): CaseMark = this.copy(prefix = Option(prefix))
 
   def withPrefix(prefix: String): CaseMark = {
