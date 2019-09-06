@@ -15,4 +15,6 @@ project/plugins/project/
 .cache
 .lib/
 
+## IntelliJ Idea
+.idea/*
 
