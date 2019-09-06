@@ -43,6 +43,13 @@ object CaseYear {
     def list: Array[Era] = Array(M, T, S, H)
 
     def apply(idx: Int): Era = list(idx)
+    def apply(javaEra: JapaneseEra): Era = javaEra match {
+      case JapaneseEra.HEISEI => this.Heisei
+      case JapaneseEra.SHOWA => this.Showa
+      case JapaneseEra.TAISHO => this.Taisho
+      case JapaneseEra.MEIJI => this.Meiji
+    }
+    
     def apply(str: String): Option[Era] = list.find(_.name == str)
   }
 
