@@ -14,7 +14,7 @@ object JudgeType {
 
   case object ORDER extends JudgeType("決定")
 
-  val values = Array(JUDGMENT, ORDER)
+  val values = Array[JudgeType](JUDGMENT, ORDER)
 
   def unapply(x: JudgeType) = Option((x.name))
 
