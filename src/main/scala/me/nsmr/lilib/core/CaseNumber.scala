@@ -43,6 +43,9 @@ object CaseYear {
 
     case object Heisei extends Era("平成", JapaneseEra.HEISEI)
 
+    /** JapaneseDate.Era は9月まで実装されない予定。 */
+    case object Reiwa extends Era("令和", null)
+
     def M = Meiji
 
     def T = Taisho
@@ -51,7 +54,9 @@ object CaseYear {
 
     def H = Heisei
 
-    def list: Array[Era] = Array(M, T, S, H)
+    def R = Reiwa
+
+    def list = Array[Era](M, T, S, H, R)
 
     def apply(idx: Int): Era = list(idx)
 
@@ -71,12 +76,22 @@ object CaseYear {
 
 case class CaseYear(era: CaseYear.Era, year: Int) {
 
-  override def toString = year match {
-    case 1 => s"${era}元年"
-    case _ => s"${era}${year}年"
+  override def toString = {
+    year match {
+      case 1 => s"${era}元年"
+      case _ => s"${era}${year}年"
+    }
   }
 
-  def toJavaYear: Year = Year.of(JapaneseChronology.INSTANCE.prolepticYear(era.javaEra, year))
+  /** JapaneseEraにおいて令和が実装されるまでの応急処置 */
+  def toJavaYear: Year = {
+    import CaseYear.Era
+    val (era, year) = this.era match {
+      case Era.Reiwa => (Era.Heisei, this.year + 30)
+      case _ => (this.era, this.year)
+    }
+    Year.of(JapaneseChronology.INSTANCE.prolepticYear(era.javaEra, year))
+  }
 }
 
 object CaseMark {
