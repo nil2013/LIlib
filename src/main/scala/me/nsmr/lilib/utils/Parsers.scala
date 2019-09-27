@@ -3,7 +3,7 @@ package utils
 
 import scala.util.matching.Regex
 import com.typesafe.scalalogging.Logger
-import core.{ CaseNumber, CaseYear, CaseMark, Court }
+import core.{ CaseNumber, JapaneseYear, CaseMark, Court }
 
 trait Parser[T] { def parse(str: String): Option[T] }
 
@@ -39,7 +39,7 @@ object Parsers {
 
     override def parse(str: String): Option[CaseNumber] = {
       pattern.findFirstMatchIn(str).flatMap { m =>
-        CaseYear.Era(m.group("era")).map { era =>
+        JapaneseYear.Era(m.group("era")).map { era =>
           if(m.before.length > 0 || m.after.length > 0) logger.debug(s"not exactly matches pattern of case number: ${str}")
           val year = m.group("year") match {
             case "元" => 1
@@ -57,7 +57,7 @@ object Parsers {
               mark
             }
           }
-          CaseNumber(CaseYear(era, year), mark, m.group("index").toInt)
+          CaseNumber(JapaneseYear(era, year), mark, m.group("index").toInt)
         }
       }
     }

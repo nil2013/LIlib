@@ -5,7 +5,7 @@ package core
 import java.util.Date
 
 case class SimpleCaseNumber(
-  override val year: CaseYear,
-  override val mark: CaseMark,
-  override val index: Int
+                             override val year: JapaneseYear,
+                             override val mark: CaseMark,
+                             override val index: Int
 ) extends CaseNumber

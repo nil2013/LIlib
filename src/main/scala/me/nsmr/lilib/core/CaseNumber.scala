@@ -2,23 +2,19 @@ package me.nsmr
 package lilib
 package core
 
-import java.time.chrono.{JapaneseChronology, JapaneseDate, JapaneseEra}
-import java.time.format.DateTimeFormatter
-import java.time.{LocalDate, Year}
-
 object CaseNumber {
-  def apply(year: CaseYear, mark: CaseMark, index: Int): CaseNumber = {
+  def apply(year: JapaneseYear, mark: CaseMark, index: Int): CaseNumber = {
     return SimpleCaseNumber(year, mark, index)
   }
 
-  def unapply(obj: CaseNumber): Option[(CaseYear, CaseMark, Int)] = return Option((obj.year, obj.mark, obj.index))
+  def unapply(obj: CaseNumber): Option[(JapaneseYear, CaseMark, Int)] = return Option((obj.year, obj.mark, obj.index))
 }
 
 trait CaseNumber {
 
   import CaseNumber._
 
-  def year: CaseYear
+  def year: JapaneseYear
 
   def mark: CaseMark
 
@@ -27,72 +23,6 @@ trait CaseNumber {
   override def toString(): String = s"${year}${mark}第${index}号"
 }
 
-object CaseYear {
-
-  sealed abstract class Era(val name: String, val javaEra: JapaneseEra) {
-    override def toString(): String = name
-  }
-
-  object Era {
-
-    case object Meiji extends Era("明治", JapaneseEra.MEIJI)
-
-    case object Taisho extends Era("大正", JapaneseEra.TAISHO)
-
-    case object Showa extends Era("昭和", JapaneseEra.SHOWA)
-
-    case object Heisei extends Era("平成", JapaneseEra.HEISEI)
-
-    /** JapaneseDate.Era は9月まで実装されない予定。 */
-    case object Reiwa extends Era("令和", null)
-
-    def M = Meiji
-
-    def T = Taisho
-
-    def S = Showa
-
-    def H = Heisei
-
-    def R = Reiwa
-
-    def list = Array[Era](M, T, S, H, R)
-
-    def apply(idx: Int): Era = list(idx)
-
-    def apply(javaEra: JapaneseEra): Era = javaEra match {
-      case JapaneseEra.HEISEI => this.Heisei
-      case JapaneseEra.SHOWA => this.Showa
-      case JapaneseEra.TAISHO => this.Taisho
-      case JapaneseEra.MEIJI => this.Meiji
-    }
-
-    def apply(str: String): Option[Era] = list.find(_.name == str)
-  }
-
-  private lazy val formatter = DateTimeFormatter.ofPattern("Gy年").withChronology(JapaneseChronology.INSTANCE)
-
-}
-
-case class CaseYear(era: CaseYear.Era, year: Int) {
-
-  override def toString = {
-    year match {
-      case 1 => s"${era}元年"
-      case _ => s"${era}${year}年"
-    }
-  }
-
-  /** JapaneseEraにおいて令和が実装されるまでの応急処置 */
-  def toJavaYear: Year = {
-    import CaseYear.Era
-    val (era, year) = this.era match {
-      case Era.Reiwa => (Era.Heisei, this.year + 30)
-      case _ => (this.era, this.year)
-    }
-    Year.of(JapaneseChronology.INSTANCE.prolepticYear(era.javaEra, year))
-  }
-}
 
 object CaseMark {
 
